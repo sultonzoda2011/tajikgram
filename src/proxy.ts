@@ -8,13 +8,13 @@ export function proxy(request: NextRequest) {
   if (token) {
     if (pathname === '/login') {
       const url = request.nextUrl.clone()
-      url.pathname = '/profile'
+      url.pathname = '/'
       return NextResponse.redirect(url)
     }
 
     if (pathname === '/register') {
       const url = request.nextUrl.clone()
-      url.pathname = '/profile'
+      url.pathname = '/'
       return NextResponse.redirect(url)
     }
 

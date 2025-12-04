@@ -15,7 +15,7 @@ export const RegisterSchema = z.object({
     .min(3, 'Nickname must be at least 3 characters long'),
   phoneNumber: z
     .string('Phone number must be a string')
-    .min(10, 'Phone number must be at least 10 characters long'),
+    .min(9, 'Phone number must be at least 9 characters long'),
   password: z
     .string('Password must be a string')
     .min(6, 'Password must be at least 6 characters long'),
