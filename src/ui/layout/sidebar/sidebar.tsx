@@ -34,38 +34,8 @@ const Sidebar = () => {
   }, [info, router])
 
   return (
-    <div className="p-4 w-90 h-screen border-r border-sidebar bg-sidebar text-sidebar-foreground flex flex-col animate-fadeIn">
-      <div className="flex items-center justify-between mb-6 p-3 rounded-xl bg-sidebar-accent/10 hover:bg-sidebar-accent/20 transition-colors cursor-pointer shadow-sm">
-        <div className="flex items-center gap-3">
-          <Image
-            src={
-              info?.profilePictureUrl ||
-              'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png'
-            }
-            width={56}
-            height={56}
-            alt="Default User"
-            className=" rounded-full object-cover border-2 border-primary"
-          />
-          <div className="flex flex-col overflow-hidden">
-            <span className="font-semibold text-sidebar-foreground truncate flex items-center gap-2">
-              {info?.fullName}
-              <Verified className="w-3 h-3 text-blue-500" />
-            </span>
-            <span className="text-sm text-sidebar-foreground/60 truncate">Online</span>
-          </div>
-        </div>
-        <div className="flex  gap-5">
-          {' '}
-          <Button
-            variant="secondary"
-            className="px-4 py-2 rounded-lg text-sm border border-border hover:bg-muted transition-all duration-200 shadow-sm"
-          >
-            <Settings className="w-4 h-4" />
-          </Button>
-          <ThemeToggle />
-        </div>
-      </div>
+    <div className="p-4 w-90 h-screen border-r  flex flex-col ">
+
 
       <div className="relative mb-4">
         <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/60" />
