@@ -1,4 +1,4 @@
-import { GetUsers } from '@/api/users'
+import { SearchUser } from '@/api/users'
 import { IUser } from '@/types/user'
 import ErrorState from '@/ui/common/errorState'
 import LoadingState from '@/ui/common/loadingState'
@@ -10,22 +10,18 @@ interface IUserProps {
   setUserName: Dispatch<SetStateAction<string>>
   setProfileUserModalOpen: Dispatch<SetStateAction<boolean>>
 }
-const Users = ({ query, setProfileUserModalOpen, setUserName }: IUserProps) => {
+const Users = ({ setProfileUserModalOpen, setUserName, query }: IUserProps) => {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['users'],
-    queryFn: GetUsers,
+    queryKey: ['users', query],
+    queryFn: () => SearchUser(query),
   })
   if (isLoading) return <LoadingState />
 
-  const filteredUser = data?.filter((friend: IUser) =>
-    friend.userName.toLowerCase().includes(query.toLowerCase()),
-  )
-  if (isError) return <ErrorState message="Failed to load users.  " />
-  if (data?.length == 0 || filteredUser?.length == 0)
-    return <ErrorState message={`Not User with ${query}`} />
+  if (isError || data?.length == 0 || data?.length == 0)
+    return <ErrorState message="Failed to load users.  " />
   return (
     <div>
-      {filteredUser?.map((user: IUser) => (
+      {data?.map((user: IUser) => (
         <UserItem
           setUserName={setUserName}
           setProfileUserModalOpen={setProfileUserModalOpen}

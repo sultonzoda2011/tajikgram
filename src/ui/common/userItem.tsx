@@ -3,14 +3,15 @@ import { Mail, User } from 'lucide-react'
 import Image from 'next/image'
 
 interface UserItemProps {
-  id: string 
+  id: string
   profilePictureUrl: string
   userName: string
   nickname: string
   setUserName: Dispatch<SetStateAction<string>>
   email: string
   rightActions?: React.ReactNode
-  setProfileUserModalOpen: Dispatch<SetStateAction<boolean>>
+  onClick?: () => void
+  setProfileUserModalOpen?: Dispatch<SetStateAction<boolean>> | undefined
 }
 
 const UserItem = ({
@@ -19,11 +20,16 @@ const UserItem = ({
   nickname,
   email,
   setUserName,
+  id,
+  onClick,
   rightActions,
   setProfileUserModalOpen,
 }: UserItemProps) => {
   return (
-    <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-sidebar-accent/20 transition-colors cursor-pointer border-b border-sidebar-border">
+    <div
+      onClick={onClick}
+      className="flex items-center gap-3 p-3 rounded-lg hover:bg-sidebar-accent/20 transition-colors cursor-pointer border-b border-sidebar-border"
+    >
       <div className="relative w-12 h-12 shrink-0">
         {profilePictureUrl ? (
           <Image
@@ -42,7 +48,7 @@ const UserItem = ({
 
       <div
         onClick={() => {
-          setProfileUserModalOpen(true)
+          if (setProfileUserModalOpen) setProfileUserModalOpen(true)
           setUserName(userName)
         }}
         className="flex flex-col overflow-hidden"

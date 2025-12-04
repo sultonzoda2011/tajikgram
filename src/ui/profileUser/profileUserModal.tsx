@@ -11,11 +11,13 @@ import { SearchUser } from '@/api/users'
 interface IProfileUserModalProps {
   userName: string
   profileUserModalOpen: boolean
+  type: boolean
   setProfileUserModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
 const ProfileUserModal = ({
   userName,
+  type,
   profileUserModalOpen,
   setProfileUserModalOpen,
 }: IProfileUserModalProps) => {
@@ -73,6 +75,12 @@ const ProfileUserModal = ({
           </div>
         )}
       </div>
+      {type && (
+        <div
+          onClick={() => {
+          }}
+        ></div>
+      )}
     </div>
   )
 }

@@ -1,12 +1,9 @@
-import { IUser } from '@/types/user'
+import { api } from '@/lib/utils/axiosConfig'
 
-
-export interface IFriendRequest {
-  id: string
-  senderId: string
-  sender: IUser
-  receiverId: string
-  receiver: IUser | null
-  status: number
-  createdAt: string
+export const RequestFriend = async (receiverId: string) => {
+  try {
+    return api.post('/Friends/request', { receiverId })
+  } catch (error) {
+    console.error(error)
+  }
 }
