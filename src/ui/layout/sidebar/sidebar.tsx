@@ -13,6 +13,7 @@ const Sidebar = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [profileUserModalOpen, setProfileUserModalOpen] = useState(false)
   const [userName, setUserName] = useState<string>('')
+  const [canSendRequest, setCanSendRequest] = useState<boolean>(false)
   const router = useRouter()
   const info = decodeJwt()
   useEffect(() => {
@@ -48,12 +49,15 @@ const Sidebar = () => {
             query={searchQuery}
             setUserName={setUserName}
             setProfileUserModalOpen={setProfileUserModalOpen}
+            setCanSendRequest={setCanSendRequest}
           />
         )}
-        {!searchQuery && <Friends setUserName={setUserName} />}
+        {!searchQuery && (
+          <Friends setUserName={setUserName} setProfileUserModalOpen={setProfileUserModalOpen} setCanSendRequest={setCanSendRequest} />
+        )}
       </div>
       <ProfileUserModal
-        type={false}
+        canSendRequest={canSendRequest}
         userName={userName}
         profileUserModalOpen={profileUserModalOpen}
         setProfileUserModalOpen={setProfileUserModalOpen}

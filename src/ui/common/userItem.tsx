@@ -10,7 +10,7 @@ interface UserItemProps {
   setUserName: Dispatch<SetStateAction<string>>
   email: string
   rightActions?: React.ReactNode
-  onClick?: () => void
+  onclick?: () => void
   setProfileUserModalOpen?: Dispatch<SetStateAction<boolean>> | undefined
 }
 
@@ -20,14 +20,13 @@ const UserItem = ({
   nickname,
   email,
   setUserName,
-  id,
-  onClick,
+  onclick,
   rightActions,
   setProfileUserModalOpen,
 }: UserItemProps) => {
   return (
     <div
-      onClick={onClick}
+      onClick={onclick}
       className="flex items-center gap-3 p-3 rounded-lg hover:bg-sidebar-accent/20 transition-colors cursor-pointer border-b border-sidebar-border"
     >
       <div className="relative w-12 h-12 shrink-0">
@@ -47,10 +46,7 @@ const UserItem = ({
       </div>
 
       <div
-        onClick={() => {
-          if (setProfileUserModalOpen) setProfileUserModalOpen(true)
-          setUserName(userName)
-        }}
+       {...onclick && { onClick: onclick }}
         className="flex flex-col overflow-hidden"
       >
         <span className="font-semibold text-sidebar-foreground truncate">

@@ -1,4 +1,4 @@
-import { SearchUser } from '@/api/users'
+import { searchUser } from '@/api/users'
 import { IUser } from '@/types/user'
 import ErrorState from '@/ui/common/errorState'
 import LoadingState from '@/ui/common/loadingState'
@@ -9,11 +9,12 @@ interface IUserProps {
   query: string
   setUserName: Dispatch<SetStateAction<string>>
   setProfileUserModalOpen: Dispatch<SetStateAction<boolean>>
+  setCanSendRequest: Dispatch<SetStateAction<boolean>>
 }
-const Users = ({ setProfileUserModalOpen, setUserName, query }: IUserProps) => {
+const Users = ({ setProfileUserModalOpen, setUserName, query, setCanSendRequest }: IUserProps) => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['users', query],
-    queryFn: () => SearchUser(query),
+    queryFn: () => searchUser(query),
   })
   if (isLoading) return <LoadingState />
 
@@ -23,14 +24,18 @@ const Users = ({ setProfileUserModalOpen, setUserName, query }: IUserProps) => {
     <div>
       {data?.map((user: IUser) => (
         <UserItem
-          setUserName={setUserName}
-          setProfileUserModalOpen={setProfileUserModalOpen}
           key={user.id}
           id={user.id}
           profilePictureUrl={user.profilePictureUrl}
           userName={user.userName}
           nickname={user.nickname}
           email={user.email}
+          setUserName={setUserName}
+          onclick={() => {
+            setUserName(user.userName)
+            setCanSendRequest(true)
+            setProfileUserModalOpen(true)
+          }}
         />
       ))}
     </div>

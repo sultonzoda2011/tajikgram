@@ -1,6 +1,5 @@
 'use client'
 
-import { LoginUser } from '@/api/auth'
 import { setToken } from '@/lib/utils/cookies'
 import { ILogin } from '@/types/auth'
 import { Button } from '@/ui/button/button'
@@ -15,6 +14,7 @@ import { LoginSchema } from '@/schemas/auth'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { ThemeToggle } from '@/ui/common/themeToggle'
+import { loginUser } from '@/api/auth'
 
 const LoginPage = () => {
   const router = useRouter()
@@ -23,7 +23,7 @@ const LoginPage = () => {
   })
   const [eyeOpen, setEyeOpen] = useState(false)
   const { mutate } = useMutation({
-    mutationFn: LoginUser,
+    mutationFn: loginUser,
     onSuccess: (res) => {
       const response = res as { data: { message: string; data: { token: string } } }
       setToken(response.data.data.token)

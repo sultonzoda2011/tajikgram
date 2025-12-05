@@ -1,4 +1,4 @@
-import { GetFriends } from '@/api/friends'
+import { getFriends } from '@/api/friends'
 import { IFriend } from '@/types/friends'
 import ErrorState from '@/ui/common/errorState'
 import LoadingState from '@/ui/common/loadingState'
@@ -8,14 +8,16 @@ import { useRouter } from 'next/navigation'
 import { Dispatch, SetStateAction } from 'react'
 
 interface IFriendsProps {
+  setProfileUserModalOpen: Dispatch<SetStateAction<boolean>>
   setUserName: Dispatch<SetStateAction<string>>
+  setCanSendRequest: Dispatch<SetStateAction<boolean>>
 }
 
-const Friends = ({ setUserName }: IFriendsProps) => {
+const Friends = ({ setUserName, setProfileUserModalOpen, setCanSendRequest }: IFriendsProps) => {
   const router = useRouter()
   const { data, isLoading, isError } = useQuery<IFriend[]>({
     queryKey: ['friends'],
-    queryFn: GetFriends,
+    queryFn: getFriends,
   })
 
   if (isLoading) return <LoadingState />
@@ -29,13 +31,18 @@ const Friends = ({ setUserName }: IFriendsProps) => {
           setUserName={setUserName}
           key={friend.id}
           id={friend.id}
-          onClick={() => {
-            router.push(`/chat/${friend.id}`)
+          onclick={() => {
+            // setProfileUserModalOpen(true)
+            // setCanSendRequest(false)
+            // setUserName(friend.userName)
+            router.push(`/chat/private/${friend.id}`)
           }}
           profilePictureUrl={friend.profilePictureUrl}
           userName={friend.userName}
           nickname={friend.nickname}
           email={friend.email}
+          setProfileUserModalOpen={setProfileUserModalOpen}
+
         />
       ))}
     </div>

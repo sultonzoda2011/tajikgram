@@ -1,6 +1,5 @@
 'use client'
 
-import { RegisterUser } from '@/api/auth'
 import { IRegister } from '@/types/auth'
 import { Button } from '@/ui/button/button'
 import FormInput from '@/ui/input/formInput'
@@ -14,6 +13,7 @@ import { RegisterSchema } from '@/schemas/auth'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { ThemeToggle } from '@/ui/common/themeToggle'
+import { registerUser } from '@/api/auth'
 
 const RegisterPage = () => {
   const router = useRouter()
@@ -23,7 +23,7 @@ const RegisterPage = () => {
   const [eyeOpen, setEyeOpen] = useState(false)
 
   const { mutate } = useMutation({
-    mutationFn: RegisterUser,
+    mutationFn: registerUser,
     onSuccess: (res) => {
       const response = res as { data: { message: string } }
       toast.success(response?.data?.message || 'Welcome to ChatGram')

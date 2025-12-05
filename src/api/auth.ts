@@ -1,7 +1,7 @@
 import { api } from '@/lib/utils/axiosConfig'
 import { ILogin, IRegister } from '@/types/auth'
 
-export const RegisterUser = async (data: IRegister) => {
+export const registerUser = async (data: IRegister) => {
   try {
     return api.post('/Auth/register', data)
   } catch (error) {
@@ -9,7 +9,7 @@ export const RegisterUser = async (data: IRegister) => {
   }
 }
 
-export const LoginUser = async (data: ILogin) => {
+export const loginUser = async (data: ILogin) => {
   try {
     return api.post('/Auth/login', data)
   } catch (error) {

@@ -1,7 +1,7 @@
 import { IFriend } from '@/types/friends'
 import { api } from '@/lib/utils/axiosConfig'
 
-export const GetFriends = async (): Promise<IFriend[]> => {
+export const getFriends = async (): Promise<IFriend[]> => {
   try {
     const response = await api.get<IFriend[]>('/Friends')
     return response.data

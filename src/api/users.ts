@@ -5,7 +5,7 @@ interface IUsersResponse {
   data: IUser[]
 }
 
-export const GetUsers = async () => {
+export const getUsers = async () => {
   try {
     const response = await api.get<IUsersResponse>('/Users')
     return response.data.data || []
@@ -15,7 +15,7 @@ export const GetUsers = async () => {
   }
 }
 
-export const SearchUser = async (query: string) => {
+export const searchUser = async (query: string) => {
   try {
     const response = await api.get<IUsersResponse>('/Users/search', {
       params: {
